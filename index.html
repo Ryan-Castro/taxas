@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" oninput="calculate()" id="pryce">
+    <input type="text" id="entry">
+    <table>
+        <thead>
+            <th>visa</th>
+            <th>parcelas</th>
+            <th>valor total</th>
+        </thead>
+        <tbody id="bodyVisa">
+
+        </tbody>
+    </table>
+    <table>
+        <thead>
+            <th>elo e outras</th>
+            <th>parcelas</th>
+            <th>valor total</th>
+        </thead>
+        <tbody id="bodyElo">
+            
+        </tbody>
+    </table>
+    <script>
+        let taxaVisa = [1.0139,1.0296,1.0437,1.0506,1.0575,1.0643,1.0710,1.0782,1.0848,1.0914,1.0978,1.1043,1.1107,]
+        let taxaElo =  [1.0179,1.0329,1.0452,1.0521,1.0590,1.0658,1.0725,1.0802,1.0868,1.0934,1.0998,1.1063,1.1127,]
+        function calculate(){
+            let price = document.querySelector("#pryce").value
+            let entry = document.querySelector("#entry").value
+            document.querySelector("#bodyVisa").innerHTML = ""
+            for(let visa = 0; visa < 13; visa++){
+                let parcelas = visa == 0 ? 1:visa
+                document.querySelector("#bodyVisa").innerHTML += `
+                    <td>${visa}</td>
+                    <td>${(((price-entry) * taxaVisa[visa]) / parcelas).toFixed(2)}</td>
+                    <td>${((price-entry) * taxaVisa[visa]).toFixed(2)}</td>
+                `
+            }
+        }
+    </script>
+</body>
+</html>
